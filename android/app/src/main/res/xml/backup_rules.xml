@@ -1,0 +1,18 @@
+<?xml version="1.0" encoding="utf-8"?>
+<!--
+  Android Auto Backup (API < 31 / legacy full-backup) rules.
+  Only the app's SQLite database (all accounts, IPOs, applications,
+  registrars) is included, so a reinstall or new-device setup on the
+  same Google account restores it automatically. Because this file
+  lists explicit <include> elements, everything not listed — including
+  the encrypted secure-storage prefs holding the IPO Guru API key — is
+  already excluded by default; no <exclude> rule is needed (and lint
+  rejects one for a domain that was never included in the first
+  place). That API key's encryption is tied to this device's Android
+  Keystore anyway and wouldn't decrypt correctly after a restore to a
+  different device, so leaving it out is correct — re-entering it once
+  is cheap and safer than shipping a broken ciphertext across devices.
+-->
+<full-backup-content>
+    <include domain="database" path="." />
+</full-backup-content>
